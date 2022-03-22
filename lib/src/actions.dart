@@ -123,6 +123,7 @@ class SlidableAction extends StatelessWidget {
     this.icon,
     this.spacing = 4,
     this.label,
+    this.labelStyle,
   })  : assert(flex > 0),
         assert(icon != null || label != null),
         super(key: key);
@@ -153,6 +154,9 @@ class SlidableAction extends StatelessWidget {
   /// A label to display below the [icon].
   final String? label;
 
+  /// label style
+  final TextStyle? labelStyle;
+
   @override
   Widget build(BuildContext context) {
     final children = <Widget>[];
@@ -173,6 +177,7 @@ class SlidableAction extends StatelessWidget {
       children.add(
         Text(
           label!,
+          style: labelStyle,
           overflow: TextOverflow.ellipsis,
         ),
       );

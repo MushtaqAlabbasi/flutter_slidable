@@ -28,6 +28,7 @@ class Slidable extends StatefulWidget {
     this.dragStartBehavior = DragStartBehavior.down,
     this.useTextDirection = true,
     required this.child,
+    this.actionPadding,
   }) : super(key: key);
 
   /// Whether this slidable is interactive.
@@ -100,6 +101,9 @@ class Slidable extends StatefulWidget {
   ///
   /// {@macro flutter.widgets.ProxyWidget.child}
   final Widget child;
+
+  /// to make padding to actions
+  final EdgeInsetsGeometry? actionPadding;
 
   @override
   _SlidableState createState() => _SlidableState();
@@ -213,6 +217,7 @@ class _SlidableState extends State<Slidable>
   }
 
   ActionPane? get startActionPane => widget.startActionPane;
+
   ActionPane? get endActionPane => widget.endActionPane;
 
   Alignment get actionPaneAlignment {
@@ -246,7 +251,10 @@ class _SlidableState extends State<Slidable>
                 axis: widget.direction,
                 controller: controller,
               ),
-              child: actionPane,
+              child: Padding(
+                padding: widget.actionPadding ?? EdgeInsets.zero,
+                child: actionPane,
+              ),
             ),
           ),
         content,
@@ -258,8 +266,8 @@ class _SlidableState extends State<Slidable>
       controller: controller,
       direction: widget.direction,
       dragStartBehavior: widget.dragStartBehavior,
-      child: SlidableNotificationSender(
-        tag: widget.groupTag,
+      child: SlidableAutoCloseNotificationSender(
+        groupTag: widget.groupTag,
         controller: controller,
         child: SlidableScrollingBehavior(
           controller: controller,
