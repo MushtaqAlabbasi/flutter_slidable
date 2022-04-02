@@ -25,6 +25,7 @@ class CustomSlidableAction extends StatelessWidget {
     this.autoClose = _kAutoClose,
     required this.onPressed,
     required this.child,
+    this.margin,
   })  : assert(flex > 0),
         super(key: key);
 
@@ -69,6 +70,9 @@ class CustomSlidableAction extends StatelessWidget {
   /// Typically the action's icon or label.
   final Widget child;
 
+  /// margin
+  final EdgeInsetsGeometry? margin;
+
   @override
   Widget build(BuildContext context) {
     final effectiveForegroundColor = foregroundColor ??
@@ -80,16 +84,19 @@ class CustomSlidableAction extends StatelessWidget {
     return Expanded(
       flex: flex,
       child: SizedBox.expand(
-        child: OutlinedButton(
-          onPressed: () => _handleTap(context),
-          style: OutlinedButton.styleFrom(
-            backgroundColor: backgroundColor,
-            primary: effectiveForegroundColor,
-            onSurface: effectiveForegroundColor,
-            shape: const RoundedRectangleBorder(),
-            side: BorderSide.none,
+        child: Card(
+          margin: margin ?? EdgeInsets.zero,
+          child: OutlinedButton(
+            onPressed: () => _handleTap(context),
+            style: OutlinedButton.styleFrom(
+              backgroundColor: backgroundColor,
+              primary: effectiveForegroundColor,
+              onSurface: effectiveForegroundColor,
+              shape: const RoundedRectangleBorder(),
+              side: BorderSide.none,
+            ),
+            child: child,
           ),
-          child: child,
         ),
       ),
     );
