@@ -131,6 +131,7 @@ class SlidableAction extends StatelessWidget {
     this.spacing = 4,
     this.label,
     this.labelStyle,
+    this.margin,
   })  : assert(flex > 0),
         assert(icon != null || label != null),
         super(key: key);
@@ -163,6 +164,9 @@ class SlidableAction extends StatelessWidget {
 
   /// label style
   final TextStyle? labelStyle;
+
+  /// margin
+  final EdgeInsetsGeometry? margin;
 
   @override
   Widget build(BuildContext context) {
@@ -205,6 +209,7 @@ class SlidableAction extends StatelessWidget {
 
     return CustomSlidableAction(
       onPressed: onPressed,
+      margin: margin,
       autoClose: autoClose,
       backgroundColor: backgroundColor,
       foregroundColor: foregroundColor,
